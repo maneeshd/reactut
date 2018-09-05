@@ -33,12 +33,12 @@ var Header = function (_React$Component) {
                 React.createElement(
                     "h1",
                     null,
-                    "Indecision?"
+                    this.props.title
                 ),
                 React.createElement(
                     "p",
-                    null,
-                    "Let the machine decide for you"
+                    { className: "lead" },
+                    this.props.subtitle
                 )
             );
         }
@@ -60,11 +60,16 @@ var Action = function (_React$Component2) {
     }
 
     _createClass(Action, [{
+        key: "handlePick",
+        value: function handlePick() {
+            alert("Hello from handlePick");
+        }
+    }, {
         key: "render",
         value: function render() {
             return React.createElement(
                 "button",
-                { className: "btn btn-primary mb-3" },
+                { className: "btn btn-primary mb-3 shadow", onClick: this.handlePick },
                 "What should I do?"
             );
         }
@@ -91,7 +96,7 @@ var Option = function (_React$Component3) {
             return React.createElement(
                 "p",
                 null,
-                "This is the Option Sub Entry."
+                this.props.option
             );
         }
     }]);
@@ -112,17 +117,24 @@ var Options = function (_React$Component4) {
     }
 
     _createClass(Options, [{
+        key: "removeAll",
+        value: function removeAll() {
+            alert("Hello from removeAll");
+        }
+    }, {
         key: "render",
         value: function render() {
             return React.createElement(
                 "div",
                 null,
+                this.props.options.map(function (option) {
+                    return React.createElement(Option, { option: option, key: option });
+                }),
                 React.createElement(
-                    "p",
-                    null,
-                    "Option Sub Entry goes here."
-                ),
-                React.createElement(Option, null)
+                    "button",
+                    { className: "btn btn-danger mb-4 shadow", onClick: this.removeAll },
+                    "Remove All"
+                )
             );
         }
     }]);
@@ -143,12 +155,42 @@ var AddOption = function (_React$Component5) {
     }
 
     _createClass(AddOption, [{
+        key: "formSubmitHandler",
+        value: function formSubmitHandler(event) {
+            event.preventDefault();
+
+            var entered_option = event.target.elements.option.value.trim();
+
+            if (entered_option) {
+                alert("Option entered was: " + entered_option);
+            } else {
+                alert("Please enter a valid option");
+            }
+        }
+    }, {
         key: "render",
         value: function render() {
             return React.createElement(
-                "button",
-                { className: "btn btn-success mb-2" },
-                "Add Option"
+                "form",
+                { className: "form-inline", id: "addOptionForm", onSubmit: this.formSubmitHandler },
+                React.createElement(
+                    "div",
+                    { className: "form-row" },
+                    React.createElement(
+                        "div",
+                        { className: "col" },
+                        React.createElement("input", { className: "form-control shadow", type: "text", name: "option" })
+                    ),
+                    React.createElement(
+                        "div",
+                        { className: "col" },
+                        React.createElement(
+                            "button",
+                            { className: "form-control btn btn-success mb-2 shadow", onClick: this.addOption },
+                            "Add Option"
+                        )
+                    )
+                )
             );
         }
     }]);
@@ -171,12 +213,16 @@ var Indecision = function (_React$Component6) {
     _createClass(Indecision, [{
         key: "render",
         value: function render() {
+            var appTitle = "Indecision?";
+            var appSubTitle = "Let the machine decide for you";
+            var options = ["Option 1", "Option 2", "Option 3", "Option 4"];
+
             return React.createElement(
                 "div",
                 null,
-                React.createElement(Header, null),
+                React.createElement(Header, { title: appTitle, subtitle: appSubTitle }),
                 React.createElement(Action, null),
-                React.createElement(Options, null),
+                React.createElement(Options, { options: options }),
                 React.createElement(AddOption, null)
             );
         }
