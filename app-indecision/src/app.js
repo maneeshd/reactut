@@ -6,6 +6,10 @@
 
 // Header title and sub-title Component Class
 class Header extends React.Component {
+    constructor (props) {
+        super(props);
+    }
+
     render() {
         return (
             <div>
@@ -18,6 +22,11 @@ class Header extends React.Component {
 
 // Decision Action button Component Class
 class Action extends React.Component {
+    constructor (props) {
+        super(props);
+        this.handlePick = this.handlePick.bind(this);
+    }
+
     handlePick() {
         alert("Hello from handlePick");
     }
@@ -31,6 +40,10 @@ class Action extends React.Component {
 
 // Option Entry Component Class
 class Option extends React.Component {
+    constructor (props) {
+        super(props);
+    }
+
     render() {
         return (
             <p>{this.props.option}</p>
@@ -40,8 +53,13 @@ class Option extends React.Component {
 
 // Options List Component Class
 class Options extends React.Component {
-    removeAll() {
-        alert("Hello from removeAll");
+    constructor (props) {
+        super(props);
+        this.handleremoveAll = this.handleremoveAll.bind(this);
+    }
+
+    handleremoveAll() {
+        console.log(this.props.options);
     }
 
     render() {
@@ -50,7 +68,7 @@ class Options extends React.Component {
                 {
                     this.props.options.map((option) => <Option option={option} key={option} />)
                 }
-                <button className="btn btn-danger mb-4 shadow" onClick={this.removeAll}>Remove All</button>
+                <button className="btn btn-danger mb-4 shadow" onClick={this.handleremoveAll}>Remove All</button>
             </div>
         );
     }
@@ -58,13 +76,20 @@ class Options extends React.Component {
 
 // AddOption button Component Class
 class AddOption extends React.Component {
+    constructor (props) {
+        super(props);
+        this.formSubmitHandler = this.formSubmitHandler.bind(this);
+    }
+
     formSubmitHandler(event) {
         event.preventDefault();
 
         const entered_option = event.target.elements.option.value.trim();
 
         if(entered_option) {
-            alert("Option entered was: " + entered_option);
+            this.setState(
+                (prevState, props) => {return 0;}
+            );
         }
         else {
             alert("Please enter a valid option");
@@ -85,13 +110,17 @@ class AddOption extends React.Component {
 
 // Main Component Class for App
 class Indecision extends React.Component {
+    constructor (props) {
+        super(props);
+    }
+
     render() {
         const appTitle = "Indecision?";
         const appSubTitle = "Let the machine decide for you";
         const options = ["Option 1", "Option 2", "Option 3", "Option 4"];
 
         return (
-            <div>
+            <div className="container w-50 shadow-lg p-3 text-justify mt-4">
                 <Header title={appTitle} subtitle={appSubTitle} />
                 <Action />
                 <Options options={options} />
