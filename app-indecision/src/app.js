@@ -6,7 +6,7 @@
 
 // Main Component Class for App
 class Indecision extends React.Component {
-    constructor (props) {
+    constructor(props) {
         // Call parent class constructor
         super(props);
 
@@ -22,30 +22,50 @@ class Indecision extends React.Component {
         this.handlePickOne = this.handlePickOne.bind(this);
     }
 
+    componentDidMount() {
+        try{
+            const json_str = localStorage.getItem("options");
+            const options = JSON.parse(json_str);
+            if(options) {
+                this.setState(() => ({options: options}));
+            }
+        } catch(error) {
+            // Do Nothing!
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.options.length !== this.state.options.length) {
+            const json = JSON.stringify(this.state.options);
+            localStorage.setItem("options", json);
+        }
+    }
+
     handleAddOption(option) {
-        if(!option) {
+        if (!option) {
             return <span><b>InvalidOption:</b> Enter a valid value to add option</span>;
         }
-        else if(this.state.options.indexOf(option) > -1) {
+        else if (this.state.options.indexOf(option) > -1) {
             return <span><b>DuplicateOption:</b> Option already exists</span>;
         }
         else {
             this.setState(
                 (prevState, props) => {
-                    return {options: prevState.options.concat([option])};
+                    return { options: prevState.options.concat([option]) };
                 }
             );
         }
     }
 
     handleRemoveAll() {
-        this.setState( () => ( {options: []} ) );
+        this.setState(() => ({ options: [] }));
     }
 
     handleRemoveOne(option) {
-        this.setState((prevState) => { 
+        this.setState((prevState) => {
             return {
-                options: prevState.options.filter((element) => element !== option)}; 
+                options: prevState.options.filter((element) => element !== option)
+            };
         });
     }
 
@@ -88,7 +108,7 @@ const Action = (props) => {
     return (
         <div className="d-flex justify-content-center">
             <button className="btn btn-primary mb-4 w-50 shadow btn-block font-weight-bold" onClick={props.handlePickOne} disabled={!props.hasOptions}>What should I do?</button>
-        </div> 
+        </div>
     );
 };
 
@@ -97,17 +117,13 @@ const Option = (props) => {
     return (
         <div>
             <span className="font-weight-bold">{props.option}</span>
-            <button 
-                className="btn btn-xs btn-danger ml-2 font-weight-bold py-1 px-1" 
-                data-type="minus" 
-                style={{"font-size": "10px"}} 
-                onClick={
-                    (e) => {
-                        props.handleRemoveOne(props.option);
-                    }
-                }
+            <button
+                className="btn btn-xs btn-danger ml-2 font-weight-bold py-1 px-1"
+                data-type="minus"
+                style={{ "font-size": "10px" }}
+                onClick={ (e) => { props.handleRemoveOne(props.option); }}
             >
-            -
+                -
             </button>
         </div>
     );
@@ -120,9 +136,10 @@ const Options = (props) => {
             <div className="d-flex flex-column justify-content-center align-items-center">
                 <div className="mb-2 w-25 text-center text-wrap">
                     {
-                        props.options.map((option) => <Option option={option} key={option} handleRemoveOne={props.handleRemoveOne}/>)
+                        props.options.map((option) => <Option option={option} key={option} handleRemoveOne={props.handleRemoveOne} />)
                     }
                 </div>
+                {props.options.length === 0 && <p>Please add an option to get started!</p>}
                 <button className="btn btn-sm btn-danger btn-block w-25 shadow mb-2" onClick={props.handleRemoveAll} disabled={!props.options.length}>Remove All</button>
             </div>
         </div>
@@ -131,9 +148,9 @@ const Options = (props) => {
 
 // AddOption button Component Class
 class AddOption extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
-        
+
         this.state = {
             inputValue: "",
             error: undefined
@@ -142,33 +159,16 @@ class AddOption extends React.Component {
         this.formSubmitHandler = this.formSubmitHandler.bind(this);
     }
 
-    componentDidMount() {
-        console.log("ComponentDidMount!");
-    }
-
-    
-    componentWillMount() {
-        console.log("ComponentWillMount!");
-    }
-
-    componentWillUnmount() {
-        console.log("ComponentWillMount!");
-    }
-    
-    componentDidUpdate() {
-        console.log("ComponentDidUpdate!");
-    }
-    
-    
-
     formSubmitHandler(event) {
         event.preventDefault();
 
         const entered_option = event.target.elements.option.value.trim();
         const error = this.props.handleAddOption(entered_option);
 
-        this.setState({ error: error});
-        this.setState({ inputValue: "" });
+        this.setState({ error: error });
+        if(!error) {
+            event.target.elements.option.value = "";
+        }
     }
 
     render() {
@@ -178,8 +178,8 @@ class AddOption extends React.Component {
                 <form className="form-inline justify-content-center" id="addOptionForm" onSubmit={this.formSubmitHandler}>
                     <div className="form-row">
                         <div className="col">
-                            <input className="form-control shadow" type="text" name="option" 
-                                value={this.state.inputValue} 
+                            <input className="form-control shadow" type="text" name="option"
+                                value={this.state.inputValue}
                                 onChange={e => this.setState({ inputValue: e.target.value, error: undefined })} />
                         </div>
                         <div className="col">
