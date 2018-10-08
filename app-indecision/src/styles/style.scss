@@ -1,0 +1,21 @@
+$primary-font: 'Open Sans';
+$secondary-font: Helvetica;
+$font-stack: $primary-font, $secondary-font, sans-serif;
+
+html, body {
+    margin: 0;
+    max-width: 100;
+    max-height: 100;
+    font-family: $font-stack;
+}
+
+.text-wrap {
+    word-wrap: break-word;
+}
+
+.btn-group-xs > .btn, .btn-xs {
+    padding  : .25rem .4rem;
+    font-size  : .875rem;
+    line-height  : .5;
+    border-radius : .2rem;
+}
