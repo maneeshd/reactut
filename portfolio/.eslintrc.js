@@ -18,12 +18,9 @@ module.exports = {
         "react"
     ],
     "rules": {
-        indent: [
+        "indent": [
             "error",
-            4,
-            {
-                "SwitchCase": 1
-            }
+            4
         ],
         "linebreak-style": [
             "error",
