@@ -34,7 +34,7 @@ const reset_count = () => {
 Reducers: Decide the state of the app based on the action
 Properties of redices:
     1. Reduces are pure functions. (Output of the function depends only on the input variables)
-    2. Never change state or action directly. Always return the new state.
+    2. Never change state or action directly. Always return the new state and in the default case return the previous state.
 */
 const count_reducer = (state = {count: 0}, action) => {    // Reducer
     switch (action.type) {

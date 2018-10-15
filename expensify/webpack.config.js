@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
     context: __dirname,
     entry: "./src/index.js",
+    // entry: "./redux-playground/higher-order-components.js",
     output: {
         path: path.join(__dirname, "dist", "static"),
         publicPath: "/static/",
@@ -14,7 +15,7 @@ module.exports = {
         filename: "js/bundle.js"
     },
     devtool: "cheap-module-source-map",
-    mode: "production",
+    mode: "development",
     module: {
         rules: [
             {
