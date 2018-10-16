@@ -8,16 +8,24 @@ export default class ExpenseForm extends React.Component {
 
         this.state = {
             expense_name_value: "",
-            description_value: ""
+            description_value: "",
+            amount: ""
         }
-
+        this.handle_amount_change = this.handle_amount_change.bind(this)
         this.form_submit_handler = this.form_submit_handler.bind(this)
+    }
+
+    handle_amount_change(event) {
+        const amount = event.target.value
+        if(amount.match(/^\d*(\.\d{0,2})?$/)) {
+            this.setState({amount: amount})
+        }
     }
 
     form_submit_handler(event) {
         event.preventDefault()
         const expense_name = event.target.elements.expense_name.value.trim()
-        const amount = Number.parseInt(event.target.elements.amount.value.trim())
+        const amount = Number.parseFloat(event.target.elements.amount.value.trim())
         const date_str = event.target.elements.created_on.value.trim()
         const created_on = date_str ? new Date(date_str) : new Date()
         const description = event.target.elements.description.value.trim()
@@ -50,7 +58,7 @@ export default class ExpenseForm extends React.Component {
                 <FormGroup row>
                     <Label for="amount" md={2}>Amount</Label>
                     <Col md={10}>
-                        <Input type="number" name="amount" id="amount" defaultValue={0} min={0} required/>
+                        <Input type="text" name="amount" id="amount" value={this.state.amount} required onChange={e => this.handle_amount_change(e)} />
                     </Col>
                 </FormGroup>
                 <FormGroup row>
