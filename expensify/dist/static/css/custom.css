@@ -41,6 +41,10 @@ html, body {
     border-radius: .2rem;
 }
 
+.circle {
+    border-radius: 50% !important;
+}
+
 .img {
     width: 160px;
     height: 160px;
@@ -52,5 +56,3 @@ html, body {
 .md-link:hover {
     color: #007bff;
 }
-
-/*# sourceMappingURL=custom.css.map*/
