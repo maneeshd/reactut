@@ -3,6 +3,7 @@ const path = require("path");
 const BundleTracker = require("webpack-bundle-tracker");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+const ENV = "DEV"
 
 module.exports = {
     context: __dirname,
@@ -14,8 +15,8 @@ module.exports = {
         chunkFilename: "js/[name].js",
         filename: "js/bundle.js"
     },
-    devtool: "cheap-module-source-map",
-    mode: "development",
+    devtool: ENV === "DEV" ? "cheap-module-source-map" : "none",
+    mode: ENV === "DEV" ? "development" : "production",
     module: {
         rules: [
             {

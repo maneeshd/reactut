@@ -1,26 +1,26 @@
 import uuid from "uuid"
 
 //Add Expense
-export const add_expense = (description = "", note = "NA", amount = 0.0, created_at = 0) => ({
+export const add_expense = (expense_name = "", description = "NA", amount = 0.0, created_on = 0) => ({
     type: "ADD_EXPENSE",
     expense: {
-        id: uuid(),
+        eid: uuid(),
+        expense_name: expense_name,
         description: description,
-        note: note,
         amount: amount,
-        created_at: created_at
+        created_on: created_on
     }
 })
 
 // Remove Expense
-export const remove_expense = (id) => ({
+export const remove_expense = (eid) => ({
     type: "REMOVE_EXPENSE",
-    id: id
+    eid: eid
 })
 
 // Edit Expense
-export const edit_expense = (id, updates = {}) => ({
+export const edit_expense = (eid, updates = {}) => ({
     type: "EDIT_EXPENSE",
-    id: id,
+    eid: eid,
     updates: updates
 })

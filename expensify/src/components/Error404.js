@@ -3,7 +3,7 @@ import { Container } from "reactstrap"
 
 const Error404 = ({ location }) => (
     <Container className="text-center my-5">
-        <h1 className="text-danger display-4">Error 404!</h1>
+        <p className="text-danger display-4">Error 404!</p>
         <h3><code>{location.pathname}</code> not found</h3>
     </Container>
 )

@@ -1,16 +1,27 @@
 import React from "react"
 import { connect } from "react-redux"
-import ExpenseItem from "./ExpenseItem"
-import { Container } from "reactstrap"
+import ExpenseListItem from "./ExpenseListItem"
+import { Container, Table } from "reactstrap"
 import visible_expenses from "../selectors/visibility-controller"
 
 
 const ExpenseList = (props) => (
-    <Container fluid={true} className="text-center justify-content-center align-content-center">
-        <h2>Expense List:</h2>
-        {props.expenses.map((expense) => {
-            return <ExpenseItem expense={expense}/>
-        })}
+    <Container className="text-center justify-content-center align-content-center my-2">
+        <Table bordered hover responsive className="shadow rounded">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Expense</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Delete?</th>
+                </tr>
+            </thead>
+            <tbody>
+                {props.expenses.map((expense, index) => <ExpenseListItem expense={expense} idx={index+1} key={expense.eid} />)}
+            </tbody>
+        </Table>
     </Container>
 )
 

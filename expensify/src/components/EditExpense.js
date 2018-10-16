@@ -2,7 +2,6 @@ import React from "react"
 import { Container } from "reactstrap"
 
 const EditExpense = (props) => {
-    console.log(props)
     return (
         <Container fluid={true} className="text-center">
             <h1>Edit Expense</h1>

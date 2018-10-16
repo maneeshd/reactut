@@ -2,6 +2,7 @@
 const filters_default_state = {
     text: "",
     sort_by: "date",
+    sort_order: "asc",
     start_date: undefined,
     end_date: undefined
 }
@@ -22,6 +23,11 @@ export default (state = filters_default_state, action) => {
             return {
                 ...state,
                 sort_by: "date"
+            }
+        case "SET_SORT_ORDER":
+            return {
+                ...state,
+                sort_order: action.sort_order
             }
         case "SET_START_DATE":
             return {

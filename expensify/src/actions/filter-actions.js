@@ -14,6 +14,12 @@ export const sort_by_date = () => ({
     type: "SORT_BY_DATE"
 })
 
+//
+export const set_sort_order = (order = "asc") => ({
+    type: "SET_SORT_ORDER",
+    sort_order: order
+}) 
+
 // Set start date
 export const set_start_date = (start_date = undefined) => ({
     type: "SET_START_DATE",

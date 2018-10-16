@@ -6,21 +6,17 @@ import React from "react"
 import ReactDOM from "react-dom"
 import AppRouter from './routers/AppRouter'
 import expensify_store from "./store/expensify-store"
-import { add_expense, remove_expense, edit_expense } from "./actions/expense-actions"
-import { set_text_filter, set_start_date, set_end_date, sort_by_amount, sort_by_date } from "./actions/filter-actions"
-import get_visible_expenses from "./selectors/visibility-controller"
+import { add_expense } from "./actions/expense-actions"
 import { Provider } from "react-redux"
 
 
 const store = expensify_store()
 
-store.dispatch(add_expense("Water bill", "", 50, 666))
-store.dispatch(add_expense("Gas bill", "", 150, 777))
-store.dispatch(sort_by_amount())
+store.dispatch(add_expense("Water bill", "", 50, new Date("07 Oct 2018 21:50:37")))
 
-const state = store.getState()
-const visible_expenses = get_visible_expenses(state.expenses, state.filters)
-console.log(visible_expenses)
+store.dispatch(add_expense("House rent", "", 7700, new Date("04 Oct 2018 10:38:12")))
+
+store.dispatch(add_expense("Gas bill", "", 150, new Date("01 Oct 2018 13:16:52")))
 
 const app_jsx = (
     <Provider store={store}>
