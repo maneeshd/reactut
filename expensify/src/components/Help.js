@@ -3,7 +3,7 @@ import { Container } from "reactstrap"
 
 const Help = () => (
     <Container fluid={true} className="text-center">
-        <h1>Help!</h1>
+        <h2>Help!</h2>
     </Container>
 )
 

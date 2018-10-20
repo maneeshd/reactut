@@ -15,7 +15,7 @@ const ExpenseListItem = ({ expense, idx, dispatch }) => (
             <th scope="row">{idx}</th>
             <td>{expense.expense_name}</td>
             <td><strong>&#x20B9;</strong>{expense.amount}</td>
-            <td>{expense.created_on.toLocaleString("en-IN")}</td>
+            <td>{expense.created_on.format("DD-MM-YYYY")}</td>
             <td>{expense.description ? expense.description: <strong>-</strong>}</td>
             <td>
                 <Button color="danger" className="btn-xs circle px-1" onClick={

@@ -1,6 +1,5 @@
 // Entry
 const path = require("path");
-const BundleTracker = require("webpack-bundle-tracker");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const ENV = "DEV"
@@ -34,7 +33,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new BundleTracker({filename: "./webpack-stats.json"}), 
         new MiniCssExtractPlugin({filename: "css/custom.css", chunkFilename: "css/[name].css"})
     ],
     devServer: {

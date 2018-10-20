@@ -1,63 +1,55 @@
 import React from "react"
 import { Col, Button, Form, FormGroup, Label, Input, FormFeedback } from "reactstrap"
 import moment from "moment"
-import "react-dates/initialize"
-import { SingleDatePicker } from "react-dates"
-import "react-dates/lib/css/_datepicker.css"
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
 
-import ThemedStyleSheet from 'react-with-styles/lib/ThemedStyleSheet';
-import aphroditeInterface from 'react-with-styles-interface-aphrodite';
-import DefaultTheme from 'react-dates/lib/theme/DefaultTheme';
-
-ThemedStyleSheet.registerInterface(aphroditeInterface);
-ThemedStyleSheet.registerTheme({
-    reactDates: {
-        ...DefaultTheme.reactDates,
-        color: {
-            ...DefaultTheme.reactDates.color,
-            highlighted: {
-                backgroundColor: '#82E0AA',
-                backgroundColor_active: '#58D68D',
-                backgroundColor_hover: '#58D68D',
-                color: '#186A3B',
-                color_active: '#186A3B',
-                color_hover: '#186A3B',
-            },
-        },
-    },
-});
 
 export default class ExpenseForm extends React.Component {
     state = {
         expense_name_value: "",
         description_value: "",
-        amount: "",
-        created_on: moment(),
-        calendar_focused: false
+        amount_value: "",
+        created_on_value: moment(),
+        expense_name_error: undefined,
+        amount_value_error: undefined
     }
 
     handle_expense_name_change = (event) => {
-        this.setState({expense_name_value: event.target.value})
+        const expense_name_value = event.target.value
+        this.setState(() => ({ expense_name_value: expense_name_value, expense_name_error: undefined }))
     }
 
     handle_amount_change = (event) => {
-        const amount = event.target.value
-        if(amount.match(/^\d*(\.\d{0,2})?$/)) {
-            this.setState({amount: amount})
+        const amount_value = event.target.value
+        if(!amount_value || amount_value.match(/^\d{1,}(\.\d{0,2})?$/)) {
+            this.setState(() => ({ amount_value: amount_value, amount_value_error: undefined }))
         }
     }
 
-    handle_date_change = (created_on) => {
-        this.setState({ created_on: created_on })
-    }
-
-    handle_focus_change = ({focused}) => {
-        this.setState({calendar_focused: focused})
+    handle_date_change = (created_on_value) => {
+        if(created_on_value) {
+            this.setState(() => ({ created_on_value: created_on_value }))
+        }
     }
 
     form_submit_handler = (event) => {
         event.preventDefault()
-        console.log(this.state)
+        if(!this.state.expense_name_value) {
+            this.setState(() => ({ expense_name_error: "Please provide Expense name/value." }))
+        }
+        else if (!this.state.amount_value) {
+            this.setState(() => ({ amount_value_error: "Please provide amount of expense." }))
+        } else {
+            this.setState(() => ({ expense_name_error: undefined }))
+            this.setState(() => ({ amount_value_error: undefined }))
+            this.props.onSubmit({
+                expense_name: this.state.expense_name_value,
+                amount: parseFloat(this.state.amount_value, 10),
+                created_on: this.state.created_on_value,
+                description: this.state.description_value
+            })
+        }
     }
 
     render() {
@@ -67,38 +59,49 @@ export default class ExpenseForm extends React.Component {
                     <Label for="expense_name" md={2}>Expense</Label>
                     <Col md={10}>
                         <Input
-                            type="text"
-                            name="expense_name"
                             id="expense_name"
                             placeholder="Name/Type of expense"
                             autoFocus
-                            required
                             minLength={6}
                             value={this.state.expense_name_value}
                             onChange={this.handle_expense_name_change}
                             autoComplete="false"
+                            required
+                            invalid={this.state.expense_name_error ? true : false}
                         />
+                        <FormFeedback>{this.state.expense_name_error}</FormFeedback>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
                     <Label for="amount" md={2}>Amount</Label>
                     <Col md={10}>
-                        <Input type="text" name="amount" id="amount" value={this.state.amount} required onChange={this.handle_amount_change} autoComplete="false" />
+                        <Input
+                            id="amount"
+                            value={this.state.amount_value}
+                            onChange={this.handle_amount_change}
+                            autoComplete="false"
+                            required
+                            invalid={this.state.amount_value_error ? true : false}
+                        />
+                        <FormFeedback>{this.state.amount_value_error}</FormFeedback>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
                     <Label for="created_on" md={2}>Date</Label>
                     <Col md={10}>
-                        <SingleDatePicker
+                        <DatePicker
+                            selected={this.state.created_on_value}
+                            onChange={this.handle_date_change}
+                            dateFormat="DD-MMM-YYYY"
+                            maxDate={moment()}
+                            todayButton="Today"
+                            className="form-control"
                             id="created_on"
-                            date={this.state.created_on}
-                            onDateChange={this.handle_date_change}
-                            focused={this.state.calendar_focused}
-                            onFocusChange={this.handle_focus_change}
-                            numberOfMonths={1}
-                            isOutsideRange={(day) => false}
-                            displayFormat="DD-MMM-YYYY"
-                            showDefaultInputIcon
+                            locale="en"
+                            isClearable={false}
+                            autoComplete="false"
+                            required
+                            value={this.state.created_on_value.format("DD-MMM-YYYY")}
                         />
                     </Col>
                 </FormGroup>
@@ -107,17 +110,24 @@ export default class ExpenseForm extends React.Component {
                     <Col md={10}>
                         <Input
                             type="textarea"
-                            name="description"
                             id="description"
-                            placeholder="Add an optional note for your expense"
+                            placeholder="Add an optional description/note for your expense (max characters=64)"
                             value={this.state.description_value}
                             onChange={e => this.setState({description_value: e.target.value})}
+                            maxLength={64}
                         />
                     </Col>
                 </FormGroup>
                 <FormGroup row>
                     <Col md={12} className="text-center">
-                        <Input type="submit" color="primary" value="Submit" tag={Button} className="w-50 shadow rounded">Submit</Input>
+                        <Input
+                            type="submit"
+                            color="primary"
+                            value="Submit"
+                            tag={Button}
+                            className="w-50 shadow rounded bg-primary text-light">
+                                Submit
+                        </Input>
                     </Col>
                 </FormGroup>
             </Form>
