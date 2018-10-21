@@ -2,7 +2,7 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const ENV = "PROD"
+const ENV = "DEV"
 
 module.exports = {
     context: __dirname,
