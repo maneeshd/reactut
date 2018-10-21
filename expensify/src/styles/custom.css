@@ -48,11 +48,11 @@ body {
     border-radius: 50% !important;
 }
 
-.img {
+.round-img {
     width: 160px;
     height: 160px;
     margin: 0 auto;
-    border-radius: 50%;
+    border-radius: 50% !important;
     overflow: hidden;
 }
 

@@ -1,6 +1,6 @@
 // State Visibility
 const date_comparator = (exp1, exp2) => (
-    (exp1.created_on.valueOf() > exp2.created_on.valueOf()) ? 1 : (exp1.created_on.valueOf() < exp2.created_on.valueOf()) ? -1 : 0
+    (exp1.created_on > exp2.created_on) ? 1 : (exp1.created_on < exp2.created_on) ? -1 : 0
 )
 
 const amount_comparator = (exp1, exp2) => (
@@ -11,11 +11,10 @@ const amount_comparator = (exp1, exp2) => (
 export default (expenses, {text, sort_by, sort_order, start_date, end_date }) => {
     // Apply Filter
     let filtered_expenses = expenses.filter((expense) => {
-        const start_date_match = typeof start_date !== "number" || expense.created_on.valueOf() >= start_date
-        const end_date_match = typeof start_date !== "number" || expense.created_on.valueOf() <= end_date
+        const start_date_match = start_date ? start_date.isSameOrBefore(expense.created_on, "day") : true
+        const end_date_match = end_date ? end_date.isSameOrAfter(expense.created_on, "day") : true
         const text_match = (expense.expense_name.toLowerCase().includes(text.toLowerCase()) ||
                             expense.description.toLowerCase().includes(text.toLowerCase()))
-
         return start_date_match && end_date_match && text_match
     })
 

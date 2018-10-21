@@ -6,13 +6,17 @@ import "react-datepicker/dist/react-datepicker.css"
 
 
 export default class ExpenseForm extends React.Component {
-    state = {
-        expense_name_value: "",
-        description_value: "",
-        amount_value: "",
-        created_on_value: moment(),
-        expense_name_error: undefined,
-        amount_value_error: undefined
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            expense_name_value: props.expense ? props.expense.expense_name : "",
+            description_value: props.expense ? props.expense.description : "",
+            amount_value: props.expense ? props.expense.amount.toString() : "",
+            created_on_value: props.expense ? props.expense.created_on : moment(),
+            expense_name_error: undefined,
+            amount_value_error: undefined
+        }
     }
 
     handle_expense_name_change = (event) => {
@@ -54,7 +58,7 @@ export default class ExpenseForm extends React.Component {
 
     render() {
         return (
-            <Form className="shadow pt-4 pb-2 px-4 border border-light rounded" onSubmit={this.form_submit_handler}>
+            <Form className="pt-4 pb-2 px-4 border border-light rounded" onSubmit={this.form_submit_handler}>
                 <FormGroup row>
                     <Label for="expense_name" md={2}>Expense</Label>
                     <Col md={10}>
@@ -101,7 +105,6 @@ export default class ExpenseForm extends React.Component {
                             isClearable={false}
                             autoComplete="false"
                             required
-                            value={this.state.created_on_value.format("DD-MMM-YYYY")}
                         />
                     </Col>
                 </FormGroup>

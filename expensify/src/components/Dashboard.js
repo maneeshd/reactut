@@ -2,6 +2,8 @@ import React from "react"
 import { Container } from "reactstrap"
 import ExpenseList from "./ExpenseList"
 import ExpenseListFilters from "./ExpenseListFilters"
+import AddExpense from "./AddExpense"
+
 
 
 const ExpenseDashboard = () => (
@@ -10,6 +12,7 @@ const ExpenseDashboard = () => (
         <h3>Expense List:</h3>
         <ExpenseListFilters />
         <ExpenseList />
+        <AddExpense />
     </Container>
 )
 

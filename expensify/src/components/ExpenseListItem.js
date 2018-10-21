@@ -3,6 +3,7 @@ import { Button } from "reactstrap"
 import { connect } from "react-redux"
 import { remove_expense } from "../actions/expense-actions"
 import visible_expenses from "../selectors/visibility-controller"
+import EditExpense from "./EditExpense"
 
 
 const get_locale = () => (
@@ -15,13 +16,14 @@ const ExpenseListItem = ({ expense, idx, dispatch }) => (
             <th scope="row">{idx}</th>
             <td>{expense.expense_name}</td>
             <td><strong>&#x20B9;</strong>{expense.amount}</td>
-            <td>{expense.created_on.format("DD-MM-YYYY")}</td>
+            <td>{expense.created_on.format("DD-MMM-YYYY")}</td>
             <td>{expense.description ? expense.description: <strong>-</strong>}</td>
             <td>
-                <Button color="danger" className="btn-xs circle px-1" onClick={
+                <EditExpense expense={expense} />
+                <Button color="danger"  className="rounded-circle px-1 py-0 shadow-sm ml-2" size="sm" onClick={
                     () => dispatch(remove_expense(expense.eid))
                 }>
-                    <strong>&times;</strong>
+                    &#10006;
                 </Button>
             </td>
         </tr>

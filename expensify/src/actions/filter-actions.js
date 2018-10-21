@@ -21,13 +21,13 @@ export const set_sort_order = (order = "asc") => ({
 }) 
 
 // Set start date
-export const set_start_date = (start_date = undefined) => ({
+export const set_start_date = (start_date) => ({
     type: "SET_START_DATE",
     start_date: start_date
 })
 
 // Set end date
-export const set_end_date = (end_date = undefined) => ({
+export const set_end_date = (end_date) => ({
     type: "SET_END_DATE",
     end_date: end_date
 })
