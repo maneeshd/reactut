@@ -1,8 +1,6 @@
 // Entry
 const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 
 module.exports = (env, options) => {
@@ -15,6 +13,7 @@ module.exports = (env, options) => {
         output: {
             path: path.join(__dirname, "dist", "static"),
             publicPath: "/static/",
+            chunkFilename: "js/[name].js",
             filename: "js/bundle.js"
         },
         mode: build_mode,
@@ -36,15 +35,7 @@ module.exports = (env, options) => {
             ]
         },
         plugins: [
-            new MiniCssExtractPlugin({filename: "css/styles.css"}),
-            new OptimizeCSSAssetsPlugin({
-                assetNameRegExp: /\.css$/g,
-                cssProcessor: require('cssnano'),
-                cssProcessorPluginOptions: {
-                    preset: ['default', { discardComments: { removeAll: true } }],
-                },
-                canPrint: true
-            })
+            new MiniCssExtractPlugin({filename: "css/custom.css", chunkFilename: "css/[name].css"})
         ],
         devServer: {
             contentBase: path.join(__dirname, "dist"),
@@ -52,14 +43,19 @@ module.exports = (env, options) => {
             historyApiFallback: true
         },
         optimization: {
-            minimizer: [
-                new UglifyJsPlugin({
-                    cache: true,
-                    parallel: true,
-                    sourceMap: false
-                }),
-                new OptimizeCSSAssetsPlugin({})
-            ]
+            splitChunks: {
+                cacheGroups: {
+                    default: false,
+                    vendors: false,
+                    // Customer vendor
+                    vendor: {
+                        chunks: "all",
+                        name: "vendor",
+                        test: /node_modules/,
+                        filename: "js/vendor.js"
+                    }
+                }
+            }
         },
         performance: {
             hints: false
