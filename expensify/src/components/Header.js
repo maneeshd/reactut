@@ -39,16 +39,7 @@ export default class Header extends React.Component {
                                 <NavLink exact tag={RRNavLink} to="/" activeClassName="active">Dashboard</NavLink>
                             </NavItem>
                             <NavItem accessKey={2}>
-                                <NavLink tag={RRNavLink} to="/add" activeClassName="active">Add expense</NavLink>
-                            </NavItem>
-                            <NavItem accessKey={3}>
-                                <NavLink tag={RRNavLink} to="/edit" activeClassName="active">Edit expense</NavLink>
-                            </NavItem>
-                            <NavItem accessKey={4}>
-                                <NavLink tag={RRNavLink} to="/delete" activeClassName="active">Delete expense</NavLink>
-                            </NavItem>
-                            <NavItem accessKey={5}>
-                                <NavLink tag={RRNavLink} to="/help" activeClassName="active">Help</NavLink>
+                                <NavLink tag={RRNavLink} to="/contact" activeClassName="active">Contact Me</NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>
@@ -57,3 +48,17 @@ export default class Header extends React.Component {
         )
     }
 }
+/*
+<NavItem accessKey={2}>
+    <NavLink tag={RRNavLink} to="/add" activeClassName="active">Add expense</NavLink>
+</NavItem>
+<NavItem accessKey={3}>
+    <NavLink tag={RRNavLink} to="/edit" activeClassName="active">Edit expense</NavLink>
+</NavItem>
+<NavItem accessKey={4}>
+    <NavLink tag={RRNavLink} to="/delete" activeClassName="active">Delete expense</NavLink>
+</NavItem>
+<NavItem accessKey={5}>
+    <NavLink tag={RRNavLink} to="/help" activeClassName="active">Help</NavLink>
+</NavItem>
+*/
