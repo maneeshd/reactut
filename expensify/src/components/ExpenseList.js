@@ -6,7 +6,7 @@ import visible_expenses from "../selectors/visibility-controller"
 
 
 const ExpenseList = (props) => (
-    <Container className="text-center justify-content-center align-content-center my-2">
+    <Container className="my-2">
         <Table bordered hover responsive className="shadow rounded">
             <thead>
                 <tr>

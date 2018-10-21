@@ -7,7 +7,7 @@ import { faEnvelope, faMobile } from "@fortawesome/free-solid-svg-icons"
 
 const Contact = () => (
     <Container fluid={true} className="text-center justify-content-center align-content-center d-flex my-4">
-        <Card className="w-50 rounded shadow-lg">
+        <Card className="w-auto rounded shadow-lg">
             <CardHeader><h3>Contact Me</h3></CardHeader>
 
             <div className="my-2">

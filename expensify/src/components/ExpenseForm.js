@@ -103,6 +103,7 @@ export default class ExpenseForm extends React.Component {
                             id="created_on"
                             locale="en"
                             isClearable={false}
+                            onChangeRaw={(e) => {e.preventDefault()}}
                             autoComplete="false"
                             required
                         />

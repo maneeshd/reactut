@@ -61,5 +61,9 @@ body {
 }
 
 .react-datepicker__day--outside-month {
-    visibility: hidden
+    visibility: hidden;
+}
+
+.input-group .form-control {
+    display: compact;
 }
