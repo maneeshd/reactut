@@ -9,7 +9,7 @@ import ExpenseSummary from "./ExpenseSummary"
 
 const ExpenseDashboard = () => (
     <Container fluid={true} className="text-center" id="dashboard">
-        <h2>Expensify Dashboard</h2>
+        <h3>Expensifier Dashboard</h3>
         <ExpenseSummary />
         <Container>
             <ExpenseListFilters />

@@ -31,7 +31,7 @@ export default class Header extends React.Component {
         return (
             <div className="mb-2">
                 <Navbar color="dark" dark expand="md">
-                    <NavbarBrand tag={RRNavLink} to="/" activeClassName="active">Expensify</NavbarBrand>
+                    <NavbarBrand tag={RRNavLink} to="/" activeClassName="active">Expensifier</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
