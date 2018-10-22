@@ -25,72 +25,113 @@ $gray-800: #343a40 !default; // dark
 $gray-900: #212529 !default;
 $black:    #000 !default;
 */
+@media only screen and (max-width: 768px) {
+    html,
+    body {
+        font-family: "Open Sans", Helvetica, sans-serif;
+        box-sizing: border-box;
+    }
 
-html,
-body {
-    font-family: "Open Sans", Helvetica, sans-serif;
-    box-sizing: border-box;
-}
+    .text-wrap {
+        word-wrap: break-word;
+    }
 
-.text-wrap {
-    word-wrap: break-word;
-}
+    .btn-group-xs > .btn,
+    .btn-xs {
+        padding: 0.25rem 0.4rem;
+        font-size: 0.875rem;
+        line-height: 0.5;
+        border-radius: 0.2rem;
+    }
 
-@media only screen and (max-width: 720px) {
+    .circle {
+        border-radius: 50% !important;
+    }
+
+    .round-img {
+        width: 160px;
+        height: 160px;
+        margin: 0 auto;
+        border-radius: 50% !important;
+        overflow: hidden;
+    }
+
+    .md-link:hover {
+        color: #007bff !important;
+    }
+
+    .react-datepicker__day--outside-month {
+        visibility: hidden !important;
+    }
+
+    .input-group .form-control {
+        display: compact !important;
+    }
+
     .serial-no {
-        display: none  !important;
+        display: none;
     }
 
     table {
-        font-size: 3vw !important;
+        font-size: 3vw;
     }
 
     #edit_expense {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        font-size: 3vw !important;
+        margin-left: 0;
+        margin-right: 0;
     }
 
     #delete_expense {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        margin-top: 0.25rem !important;
-        font-size: 3vw !important;
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 0.25em;
     }
 }
 
-.btn-group-xs > .btn,
-.btn-xs {
-    padding: 0.25rem 0.4rem;
-    font-size: 0.875rem;
-    line-height: 0.5;
-    border-radius: 0.2rem;
-}
+@media only screen and (min-width: 769px) {
+    html,
+    body {
+        font-family: "Open Sans", Helvetica, sans-serif;
+        box-sizing: border-box;
+    }
 
-.circle {
-    border-radius: 50% !important;
-}
+    .text-wrap {
+        word-wrap: break-word;
+    }
 
-.round-img {
-    width: 160px;
-    height: 160px;
-    margin: 0 auto;
-    border-radius: 50% !important;
-    overflow: hidden;
-}
+    .btn-group-xs > .btn,
+    .btn-xs {
+        padding: 0.25rem 0.4rem;
+        font-size: 0.875rem;
+        line-height: 0.5;
+        border-radius: 0.2rem;
+    }
 
-.md-link:hover {
-    color: #007bff !important;
-}
+    .circle {
+        border-radius: 50% !important;
+    }
 
-.react-datepicker__day--outside-month {
-    visibility: hidden !important;
-}
+    .round-img {
+        width: 160px;
+        height: 160px;
+        margin: 0 auto;
+        border-radius: 50% !important;
+        overflow: hidden;
+    }
 
-.input-group .form-control {
-    display: compact !important;
-}
+    .md-link:hover {
+        color: #007bff !important;
+    }
 
-#delete_expense {
-    margin-left: 0.25rem;
+    .react-datepicker__day--outside-month {
+        visibility: hidden !important;
+    }
+
+    .input-group .form-control {
+        display: compact !important;
+    }
+
+    #delete_expense {
+        margin-left: 0.25em;
+    }
 }
