@@ -4,6 +4,11 @@ import moment from "moment"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 
+class DatePickButton extends React.Component {
+    render() {
+        return <Button {...this.props} color="dark">{this.props.value}</Button>
+    }
+}
 
 export default class ExpenseForm extends React.Component {
     constructor(props) {
@@ -106,6 +111,7 @@ export default class ExpenseForm extends React.Component {
                             onChangeRaw={(e) => {e.preventDefault()}}
                             autoComplete="false"
                             required
+                            customInput={<DatePickButton />}
                         />
                     </Col>
                 </FormGroup>

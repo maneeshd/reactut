@@ -6,23 +6,21 @@ import visible_expenses from "../selectors/visibility-controller"
 
 
 const ExpenseList = (props) => (
-    <Container className="my-2">
-        <Table bordered hover responsive className="shadow rounded">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Expense</th>
-                    <th>Amount</th>
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th>Modify</th>
-                </tr>
-            </thead>
-            <tbody>
-                {props.expenses.map((expense, index) => <ExpenseListItem expense={expense} idx={index+1} key={expense.eid} />)}
-            </tbody>
-        </Table>
-    </Container>
+    <Table bordered hover responsive className="shadow rounded">
+        <thead>
+            <tr>
+                <th className="serial-no">#</th>
+                <th>Expense</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Modify</th>
+            </tr>
+        </thead>
+        <tbody>
+            {props.expenses.map((expense, index) => <ExpenseListItem expense={expense} idx={index + 1} key={expense.eid} />)}
+        </tbody>
+    </Table>
 )
 
 const map_state_to_props = (state) => {

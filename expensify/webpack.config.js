@@ -56,7 +56,7 @@ module.exports = (env, options) => {
                 new UglifyJsPlugin({
                     cache: true,
                     parallel: true,
-                    sourceMap: false
+                    sourceMap: in_production ? false : true
                 }),
                 new OptimizeCSSAssetsPlugin({})
             ]

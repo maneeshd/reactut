@@ -7,11 +7,13 @@ import AddExpense from "./AddExpense"
 
 
 const ExpenseDashboard = () => (
-    <Container fluid={true} className="text-center">
+    <Container fluid={true} className="text-center" id="dashboard">
         <h2>Expensify Dashboard</h2>
-        <ExpenseListFilters />
-        <ExpenseList />
-        <AddExpense />
+        <Container>
+            <ExpenseListFilters />
+            <ExpenseList />
+            <AddExpense />
+        </Container>
     </Container>
 )
 

@@ -34,7 +34,7 @@ class AddExpense extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Button color="success" onClick={() => this.setState(() => ({modal: true}))} className="shadow-sm w-auto">Add Expense</Button>
+                <Button color="success" onClick={() => this.setState(() => ({modal: true}))} className="shadow-sm w-auto mt-2 mb-4">Add Expense</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} backdrop={this.state.backdrop} size="lg">
                     <ModalHeader toggle={this.toggle}>Add Expense</ModalHeader>
                     <ModalBody>

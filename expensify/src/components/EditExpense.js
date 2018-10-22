@@ -34,7 +34,7 @@ class EditExpense extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Button color="info" onClick={() => this.setState(() => ({modal: true}))} className="rounded-circle px-1 py-0  shadow-sm" size="sm">&#9998;</Button>
+                <Button id="edit_expense" color="info" onClick={() => this.setState(() => ({modal: true}))} className="rounded-circle px-1 py-0 shadow-sm" size="sm">&#9998;</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} backdrop={this.state.backdrop} size="lg">
                     <ModalHeader toggle={this.toggle}>Edit Expense</ModalHeader>
                     <ModalBody>
