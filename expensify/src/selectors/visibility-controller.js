@@ -8,7 +8,7 @@ const amount_comparator = (exp1, exp2) => (
 )
 
 
-export default (expenses, {text, sort_by, sort_order, start_date, end_date }) => {
+export default (expenses, { text, sort_by, sort_order, start_date, end_date }) => {
     // Apply Filter
     let filtered_expenses = expenses.filter((expense) => {
         const start_date_match = start_date ? start_date.isSameOrBefore(expense.created_on, "day") : true

@@ -1,8 +1,9 @@
 import React from "react"
 import { connect } from "react-redux"
 import ExpenseListItem from "./ExpenseListItem"
-import { Container, Table } from "reactstrap"
+import { Table } from "reactstrap"
 import visible_expenses from "../selectors/visibility-controller"
+import expenses_summary from "../selectors/expenses-summary"
 
 
 const ExpenseList = (props) => (
@@ -25,7 +26,8 @@ const ExpenseList = (props) => (
 
 const map_state_to_props = (state) => {
     return {
-        expenses: visible_expenses(state.expenses, state.filters)
+        expenses: visible_expenses(state.expenses, state.filters),
+        summary: expenses_summary(state.expenses, state.filters)
     }
 }
 
