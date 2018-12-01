@@ -11,6 +11,4 @@
 - moment.js
 
 
-**Deployed:**
-
-[Expensifier](https://maneeshd-expensifier.herokuapp.com/)
+**Deployed in Heroku:[Expensifier](https://maneeshd-expensifier.herokuapp.com/)**
