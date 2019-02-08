@@ -12,8 +12,9 @@
 
 ## Projects
 
-1. [App-Indecision](app-indecision)
-2. [Expensifier](expensifier)
+**1. [App-Indecision](app-indecision)**
+
+**2. [Expensifier](expensifier)**
 
 **Live @ [Expensifier](https://maneeshd-expensifier.herokuapp.com/)**
 
